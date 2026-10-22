@@ -19,3 +19,4 @@ gitleaks = "latest"
 shellcheck = "latest"
 jactionlint = "latest"
 betterleaks = "latest"
+vercel = { version = "latest", allow_builds = ["esbuild"], trust_policy_excludes = ["undici"] }
