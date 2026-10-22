@@ -35,7 +35,6 @@
       }
     ],
     "types": [
-      "bun",
       "node",
       "typed-query-selector/strict"
     ],

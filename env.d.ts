@@ -1,10 +1,14 @@
 interface EnvironmentVariables extends Cloudflare.Env {
   readonly PORT: string
-  readonly NODE_ENV: 'development' | 'production' | 'test'
+  readonly VERCEL_URL: string
+  readonly VERCEL_BRANCH_URL: string
   readonly NEXT_PUBLIC_SITE_URL: string
+  readonly VERCEL_GIT_COMMIT_SHA: string
+  readonly VERCEL_GIT_PREVIOUS_SHA: string
+  readonly VERCEL_PROJECT_PRODUCTION_URL: string
+  readonly NODE_ENV: 'development' | 'production' | 'test'
+  readonly VERCEL_ENV: 'development' | 'production' | 'preview'
 }
-
-declare const __COMMIT_SHA__: string
 
 // Node.js `process.env` auto-completion
 declare namespace NodeJS {
