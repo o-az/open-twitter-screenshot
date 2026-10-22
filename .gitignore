@@ -10,3 +10,4 @@ test/screenshots/
 test/test-results/
 test/playwright-report/
 _
+.vercel
