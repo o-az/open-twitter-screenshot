@@ -1,0 +1,29 @@
+{
+  "__typename": "Tweet",
+  "favorite_count": 7650,
+  "lang": "en",
+  "created_at": "2026-04-15T02:00:50.000Z",
+  "display_text_range": [0, 91],
+  "entities": {},
+  "id_str": "2044234462972784792",
+  "text": "Truth, love, and beauty are all pursued for their own sake, even if they make us worse off.",
+  "user": {
+    "id_str": "745273",
+    "name": "Naval",
+    "screen_name": "naval",
+    "is_blue_verified": true,
+    "profile_image_shape": "Circle",
+    "verified": false,
+    "profile_image_url_https": "https://pbs.twimg.com/profile_images/1256841238298292232/ycqwaMI2_normal.jpg"
+  },
+  "edit_control": {
+    "edit_tweet_ids": ["2044234462972784792"],
+    "editable_until_msecs": "1776222050000",
+    "edits_remaining": "5",
+    "is_edit_eligible": true
+  },
+  "conversation_count": 458,
+  "news_action_type": "conversation",
+  "isEdited": false,
+  "isStaleEdit": false
+}
