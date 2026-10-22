@@ -1,5 +1,5 @@
-export * from "./types";
-export { parseTweetId, TweetException } from "./parse";
-export { normalizeTweet } from "./normalize";
-export { getTweet } from "./fetch";
-export { imageUrl } from "./image";
+export * from '#lib/tweet/types.ts'
+export { parseTweetId, TweetException } from '#lib/tweet/parse.ts'
+export { normalizeTweet } from '#lib/tweet/normalize.ts'
+export { getTweet } from '#lib/tweet/fetch.ts'
+export { imageUrl } from '#lib/tweet/image.ts'

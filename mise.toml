@@ -1,0 +1,21 @@
+#:schema https://mise.en.dev/schema/mise.json
+
+[settings]
+color = true
+experimental = true
+color_theme = "charm"
+minimum_release_age_excludes = ["bun", "node"]
+
+[env]
+VERCEL_TELEMETRY_DISABLED = "1"
+
+[tools]
+bun = "latest"
+node = "latest"
+usage = "latest"
+shfmt = "latest"
+ghalint = "latest"
+gitleaks = "latest"
+shellcheck = "latest"
+jactionlint = "latest"
+betterleaks = "latest"

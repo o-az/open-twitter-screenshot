@@ -1,19 +1,12 @@
-import { Button, Tabs } from "@heroui/react";
-import {
-  FileText,
-  Frame,
-  Image,
-  Paintbrush,
-  RotateCcw,
-  Upload,
-} from "lucide-react";
-import type { Post } from "@/lib/tweet/types";
-import type { StyleState, UpdateStyle } from "@/lib/style/schema";
-import type { Dimensions } from "@/components/post/artboard";
-import { BackgroundPanel } from "./background-panel";
-import { ContentPanel } from "./content-panel";
-import { StylePanel } from "./style-panel";
-import { ExportPanel, FramePanel } from "./frame-export-panel";
+import { Button, Tabs } from '@heroui/react'
+import { FileText, Frame, Image, Paintbrush, RotateCcw, Upload } from 'lucide-react'
+import type { Post } from '#lib/tweet/types.ts'
+import type { StyleState, UpdateStyle } from '#lib/style/schema.ts'
+import type { Dimensions } from '#components/post/artboard.tsx'
+import { BackgroundPanel } from '#components/studio/background-panel.tsx'
+import { ContentPanel } from '#components/studio/content-panel.tsx'
+import { StylePanel } from '#components/studio/style-panel.tsx'
+import { ExportPanel, FramePanel } from '#components/studio/frame-export-panel.tsx'
 
 export function Inspector({
   post,
@@ -23,45 +16,50 @@ export function Inspector({
   reset,
   size,
   busy,
-  onExport,
+  onExport
 }: {
-  post: Post;
-  style: StyleState;
-  update: UpdateStyle;
-  setStyle: (style: StyleState) => void;
-  reset: () => void;
-  size: Dimensions;
-  busy: boolean;
-  onExport: (copy?: boolean) => void;
+  post: Post
+  style: StyleState
+  update: UpdateStyle
+  setStyle: (style: StyleState) => void
+  reset: () => void
+  size: Dimensions
+  busy: boolean
+  onExport: (copy?: boolean) => void
 }) {
   return (
-    <div className="inspector-inner" inert={busy}>
-      <div className="inspector-heading">
+    <div
+      className='inspector-inner'
+      inert={busy}>
+      <div className='inspector-heading'>
         <div>
           <h2>Make it yours</h2>
           <p>A few details. A whole different feeling.</p>
         </div>
         <Button
-          variant="ghost"
+          variant='ghost'
           isIconOnly
-          size="sm"
-          aria-label="Reset style"
-          onPress={reset}
-        >
+          size='sm'
+          aria-label='Reset style'
+          onPress={reset}>
           <RotateCcw size={15} />
         </Button>
       </div>
-      <Tabs className="inspector-tabs" defaultSelectedKey="background">
+      <Tabs
+        className='inspector-tabs'
+        defaultSelectedKey='background'>
         <Tabs.ListContainer>
-          <Tabs.List aria-label="Design controls">
+          <Tabs.List aria-label='Design controls'>
             {[
-              { id: "content", label: "Content", Icon: FileText },
-              { id: "style", label: "Style", Icon: Paintbrush },
-              { id: "background", label: "Backdrop", Icon: Image },
-              { id: "frame", label: "Frame", Icon: Frame },
-              { id: "export", label: "Export", Icon: Upload },
+              { id: 'content', label: 'Content', Icon: FileText },
+              { id: 'style', label: 'Style', Icon: Paintbrush },
+              { id: 'background', label: 'Backdrop', Icon: Image },
+              { id: 'frame', label: 'Frame', Icon: Frame },
+              { id: 'export', label: 'Export', Icon: Upload }
             ].map(({ id, label, Icon }) => (
-              <Tabs.Tab key={id} id={id}>
+              <Tabs.Tab
+                key={id}
+                id={id}>
                 <Icon size={17} />
                 <span>{label}</span>
                 <Tabs.Indicator />
@@ -69,19 +67,34 @@ export function Inspector({
             ))}
           </Tabs.List>
         </Tabs.ListContainer>
-        <Tabs.Panel id="content">
-          <ContentPanel post={post} style={style} update={update} />
+        <Tabs.Panel id='content'>
+          <ContentPanel
+            post={post}
+            style={style}
+            update={update}
+          />
         </Tabs.Panel>
-        <Tabs.Panel id="style">
-          <StylePanel style={style} update={update} setStyle={setStyle} />
+        <Tabs.Panel id='style'>
+          <StylePanel
+            style={style}
+            update={update}
+            setStyle={setStyle}
+          />
         </Tabs.Panel>
-        <Tabs.Panel id="background">
-          <BackgroundPanel style={style} update={update} setStyle={setStyle} />
+        <Tabs.Panel id='background'>
+          <BackgroundPanel
+            style={style}
+            update={update}
+            setStyle={setStyle}
+          />
         </Tabs.Panel>
-        <Tabs.Panel id="frame">
-          <FramePanel style={style} update={update} />
+        <Tabs.Panel id='frame'>
+          <FramePanel
+            style={style}
+            update={update}
+          />
         </Tabs.Panel>
-        <Tabs.Panel id="export">
+        <Tabs.Panel id='export'>
           <ExportPanel
             style={style}
             update={update}
@@ -91,10 +104,10 @@ export function Inspector({
           />
         </Tabs.Panel>
       </Tabs>
-      <div className="inspector-bottom">
-        <span className="status-dot" />
+      <div className='inspector-bottom'>
+        <span className='status-dot' />
         Every change, instantly on canvas.<span>↗</span>
       </div>
     </div>
-  );
+  )
 }

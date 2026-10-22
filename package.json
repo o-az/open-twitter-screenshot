@@ -3,16 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@12.15.5",
+  "imports": {
+    "#*": "./src/*",
+    "#package.json": "./package.json"
+  },
   "scripts": {
-    "dev": "next dev --hostname 0.0.0.0",
     "build": "next build",
+    "dev": "next dev --hostname 0.0.0.0",
+    "check": "bun format && bun lint && bun check:types",
     "start": "next start --hostname 0.0.0.0",
-    "lint": "eslint . --max-warnings 0",
-    "typecheck": "tsc --noEmit",
-    "test": "vitest run --config test/vitest.config.ts",
-    "test:e2e": "playwright test --config test/playwright.config.ts",
-    "format": "prettier --write ."
+    "format": "oxfmt --config='oxfmt.config.ts' --write",
+    "check:types": "tsrs --project tsconfig.json --noEmit",
+    "lint": "oxlint --config='oxlint.config.ts' --type-aware --type-check --fix-dangerously"
   },
   "dependencies": {
     "@heroui/react": "3.2.6",
@@ -28,14 +30,18 @@
   "devDependencies": {
     "@playwright/test": "^1.64.1",
     "@tailwindcss/postcss": "^4.3.3",
+    "@total-typescript/ts-reset": "^0.6.1",
+    "@types/bun": "^1.4.3",
     "@types/node": "^26.6.5",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
-    "eslint": "^9.39.5",
-    "eslint-config-next": "16.4.2",
-    "prettier": "^3.9.10",
+    "oxfmt": "^0.74.0",
+    "oxlint": "^1.89.0",
+    "oxlint-tsgolint": "^7.0.2004",
     "tailwindcss": "^4.3.3",
-    "typescript": "5.9.3",
-    "vitest": "^5.0.5"
-  }
+    "tsrs": "^0.18.0-ts7.1.0-dev.20260929",
+    "typed-query-selector": "^2.12.3",
+    "typescript": "7.0.2"
+  },
+  "packageManager": "bun@1.4.4"
 }

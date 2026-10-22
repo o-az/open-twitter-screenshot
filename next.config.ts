@@ -1,8 +1,6 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
-const nextConfig: NextConfig = {
+export default {
   devIndicators: false,
-  poweredByHeader: false,
-};
-
-export default nextConfig;
+  poweredByHeader: false
+} satisfies NextConfig

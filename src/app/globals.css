@@ -1,20 +1,20 @@
-@import "tailwindcss";
-@import "@heroui/styles";
+@import 'tailwindcss';
+@import '@heroui/styles';
 
 @theme inline {
   --font-sans: var(--font-geist);
 }
 
 :root,
-[data-theme="dark"],
-[data-theme="light"] {
+[data-theme='dark'],
+[data-theme='light'] {
   --accent: #ff824d;
   --accent-foreground: #24160e;
   --focus: #ff9a70;
   --radius: 0.5rem;
   --cursor-interactive: pointer;
 }
-[data-theme="dark"] {
+[data-theme='dark'] {
   color-scheme: dark;
   --background: #161616;
   --foreground: #f3f1ee;
@@ -31,7 +31,7 @@
   --separator: #323230;
   --workspace-dot: #ffffff0d;
 }
-[data-theme="light"] {
+[data-theme='light'] {
   color-scheme: light;
   --accent: #ba4c1c;
   --accent-foreground: #ffffff;
@@ -191,7 +191,7 @@ button {
 .hero h1 span {
   color: #e8ac91;
 }
-[data-theme="light"] .hero h1 span {
+[data-theme='light'] .hero h1 span {
   color: #a34a27;
 }
 .hero > p {
@@ -306,8 +306,7 @@ kbd {
   border: 1px solid var(--border);
   border-radius: 13px;
   overflow: hidden;
-  background: radial-gradient(var(--workspace-dot) 0.8px, transparent 0.8px) 0
-    0 / 12px 12px;
+  background: radial-gradient(var(--workspace-dot) 0.8px, transparent 0.8px) 0 0 / 12px 12px;
   position: relative;
 }
 .canvas-heading {
@@ -369,7 +368,7 @@ kbd {
   inset: 0;
   pointer-events: none;
   opacity: 0.13;
-  background: url("/grain.png") repeat;
+  background: url('/grain.png') repeat;
   mix-blend-mode: multiply;
 }
 .glass-backing {
@@ -379,13 +378,7 @@ kbd {
   z-index: -1;
 }
 .checkerboard {
-  background: conic-gradient(
-      #b8b8b8 25%,
-      #ededed 0 50%,
-      #b8b8b8 0 75%,
-      #ededed 0
-    )
-    0 0 / 16px 16px;
+  background: conic-gradient(#b8b8b8 25%, #ededed 0 50%, #b8b8b8 0 75%, #ededed 0) 0 0 / 16px 16px;
 }
 .canvas-toolbar {
   display: flex;
@@ -632,7 +625,7 @@ kbd {
 .inspector-tabs .tabs__tab > svg {
   flex-shrink: 0;
 }
-.inspector-tabs .tabs__tab[data-selected="true"] {
+.inspector-tabs .tabs__tab[data-selected='true'] {
   color: var(--accent);
 }
 .inspector-tabs .tabs__indicator {
@@ -705,7 +698,7 @@ kbd {
   color: var(--muted);
   box-shadow: none;
 }
-.choice-group .toggle-button[data-selected="true"] {
+.choice-group .toggle-button[data-selected='true'] {
   background: var(--surface-tertiary);
   color: var(--foreground);
   box-shadow: 0 1px 3px #00000018;
@@ -1124,8 +1117,7 @@ kbd {
   gap: 18px 26px;
   margin-top: 18px;
   padding-top: 17px;
-  border-top: 1px solid
-    color-mix(in srgb, var(--post-secondary) 18%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--post-secondary) 18%, transparent);
   color: var(--post-secondary);
   font-size: 12px;
 }
@@ -1222,8 +1214,7 @@ kbd {
   border-radius: 6px;
 }
 .post-note {
-  border-top: 1px solid
-    color-mix(in srgb, var(--post-secondary) 25%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--post-secondary) 25%, transparent);
   margin-top: 20px;
   padding-top: 16px;
   font-size: 13px;
@@ -1239,8 +1230,7 @@ kbd {
 .post-parent {
   padding-bottom: 24px;
   margin-bottom: 24px;
-  border-bottom: 1px solid
-    color-mix(in srgb, var(--post-secondary) 25%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--post-secondary) 25%, transparent);
   font-size: 15px;
 }
 .post-link-card > img {
@@ -1337,7 +1327,7 @@ kbd {
     margin-left: 4px;
   }
   .header-actions > .header-download,
-  .header-actions > .button[aria-label="Keyboard shortcuts"] {
+  .header-actions > .button[aria-label='Keyboard shortcuts'] {
     display: none;
   }
   .share-button span {
@@ -1518,14 +1508,14 @@ kbd {
   .has-post .preview-viewport {
     height: 370px;
   }
-  [data-customizing="true"] .hero,
-  [data-customizing="true"] .canvas-toolbar {
+  [data-customizing='true'] .hero,
+  [data-customizing='true'] .canvas-toolbar {
     display: none;
   }
-  [data-customizing="true"] .canvas-section {
+  [data-customizing='true'] .canvas-section {
     padding-top: 10px;
   }
-  [data-customizing="true"] .preview-viewport {
+  [data-customizing='true'] .preview-viewport {
     height: calc(36dvh - 105px);
   }
 }
