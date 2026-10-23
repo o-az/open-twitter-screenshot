@@ -5,7 +5,6 @@ import Link from 'next/link'
 import {
   Alert,
   Button,
-  Drawer,
   Form,
   Input,
   Modal,
@@ -17,7 +16,7 @@ import {
 } from '@heroui/react'
 import {
   ArrowRight,
-  Check,
+  ChevronDown,
   Clipboard,
   Copy,
   Download,
@@ -26,7 +25,6 @@ import {
   Link2,
   Moon,
   SlidersHorizontal,
-  Sparkles,
   Sun
 } from 'lucide-react'
 import { site } from '#config/site.ts'
@@ -91,6 +89,7 @@ function StudioApp({ example }: { example: Post }) {
   const [size, setSize] = useState<Dimensions>({ width: 680, height: 480 })
   const [theme, setTheme] = useState(document.documentElement.dataset.theme || 'dark')
   const board = useRef<HTMLDivElement>(null)
+  const customizeButton = useRef<HTMLButtonElement>(null)
   const request = useRef<AbortController | null>(null)
   const busyRef = useRef(false)
   const update: UpdateStyle = (key, value) => setStyle(current => ({ ...current, [key]: value }))
@@ -323,6 +322,7 @@ function StudioApp({ example }: { example: Post }) {
             className='share-button'
             variant='secondary'
             size='sm'
+            aria-label='Share look'
             onPress={share}>
             <Link2 size={14} />
             <span>Share look</span>
@@ -339,19 +339,12 @@ function StudioApp({ example }: { example: Post }) {
         </div>
       </header>
       <main
-        className={`studio-layout ${selectedId ? 'has-post' : ''}`}
+        className='studio-layout'
         inert={busy}
         aria-busy={busy}>
         <div className='studio-main'>
-          <section className='hero'>
-            <div className='hero-eyebrow'>
-              <span /> A LITTLE MORE WORTH SHARING
-            </div>
-            <h1>
-              Good posts.
-              <br className='mobile-break' /> <span>Beautifully framed.</span>
-            </h1>
-            <p>From your feed to something worth keeping. Make it yours.</p>
+          <section className='source-bar'>
+            <h1 className='sr-only'>Twitter screenshot editor</h1>
             <Form
               className='url-form'
               onSubmit={event => {
@@ -393,15 +386,6 @@ function StudioApp({ example }: { example: Post }) {
                 <ArrowRight size={16} />
               </Button>
             </Form>
-            <div className='url-helper'>
-              <span>
-                <Check size={12} />
-                No sign-up. No watermark.
-              </span>
-              <span>
-                Or press <kbd>⌘ V</kbd> anywhere
-              </span>
-            </div>
           </section>
           {error && (
             <Alert
@@ -458,12 +442,6 @@ function StudioApp({ example }: { example: Post }) {
               now={initial.now}
             />
           </div>
-          <footer className='studio-footer'>
-            <span>
-              <Sparkles size={12} /> Small details. Better stories.
-            </span>
-            <span>Made for your corner of the internet.</span>
-          </footer>
         </div>
         <aside
           className='inspector'
@@ -474,49 +452,46 @@ function StudioApp({ example }: { example: Post }) {
       <div
         className='mobile-dock'
         inert={busy}>
-        <Button
-          variant='secondary'
-          onPress={() => {
-            window.scrollTo({ top: 0 })
-            setCustomizing(true)
+        <section
+          id='mobile-controls'
+          className='mobile-controls'
+          aria-label='Customize screenshot'
+          hidden={!customizing}
+          onKeyDown={event => {
+            if (event.key === 'Escape' && !event.defaultPrevented) {
+              event.stopPropagation()
+              setCustomizing(false)
+              customizeButton.current?.focus()
+            }
           }}>
-          <SlidersHorizontal size={16} />
-          Customize
-        </Button>
-        <Drawer.Backdrop
-          variant='transparent'
-          isOpen={customizing}
-          onOpenChange={setCustomizing}>
-          <Drawer.Content
-            placement='bottom'
-            className='mobile-drawer'>
-            <Drawer.Dialog>
-              <Drawer.Handle />
-              <Drawer.Header>
-                <Drawer.Heading>Design your post</Drawer.Heading>
-                <Drawer.CloseTrigger />
-              </Drawer.Header>
-              <Drawer.Body>
-                <Inspector {...inspectorProps} />
-              </Drawer.Body>
-            </Drawer.Dialog>
-          </Drawer.Content>
-        </Drawer.Backdrop>
-        <Button
-          isIconOnly
-          variant='secondary'
-          aria-label='Copy image'
-          isDisabled={busy || loading}
-          onPress={() => doExport(true)}>
-          <Copy size={16} />
-        </Button>
-        <Button
-          isDisabled={loading}
-          isPending={busy}
-          onPress={() => doExport()}>
-          <Download size={16} />
-          Download
-        </Button>
+          <Inspector {...inspectorProps} />
+        </section>
+        <div className='mobile-actions'>
+          <Button
+            ref={customizeButton}
+            variant='secondary'
+            aria-expanded={customizing}
+            aria-controls='mobile-controls'
+            onPress={() => setCustomizing(current => !current)}>
+            {customizing ? <ChevronDown size={16} /> : <SlidersHorizontal size={16} />}
+            {customizing ? 'Done' : 'Customize'}
+          </Button>
+          <Button
+            isIconOnly
+            variant='secondary'
+            aria-label='Copy image'
+            isDisabled={busy || loading}
+            onPress={() => doExport(true)}>
+            <Copy size={16} />
+          </Button>
+          <Button
+            isDisabled={loading}
+            isPending={busy}
+            onPress={() => doExport()}>
+            <Download size={16} />
+            Download
+          </Button>
+        </div>
       </div>
       <Modal.Backdrop
         isOpen={shortcuts}

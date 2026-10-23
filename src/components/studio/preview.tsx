@@ -29,8 +29,9 @@ export function Preview({
   const container = useRef<HTMLDivElement>(null)
   const [area, setArea] = useState({ width: 700, height: 520 })
   const [zoom, setZoom] = useState<number | 'fit' | null>(null)
-  const verticalPadding = area.height < 250 ? 12 : 36
-  const fitWidth = Math.min(1, Math.max(1, area.width - 80) / size.width)
+  const horizontalPadding = area.width < 500 ? 12 : 40
+  const verticalPadding = area.width < 500 || area.height < 250 ? 12 : 36
+  const fitWidth = Math.min(1, Math.max(1, area.width - horizontalPadding * 2) / size.width)
   const fit = Math.min(fitWidth, Math.max(1, area.height - verticalPadding * 2) / size.height)
   const tall = style.ratio === 'auto' && size.height > size.width * 2
   const scale = zoom === 'fit' ? fit : (zoom ?? (tall ? fitWidth : fit))
@@ -57,7 +58,7 @@ export function Preview({
           <span className='status-dot' />
           LIVE PREVIEW
         </span>
-        <span>{example ? 'EXAMPLE POST · TRY YOUR OWN ABOVE' : `@${post.author.handle}`}</span>
+        <span>{example ? 'EXAMPLE POST' : `@${post.author.handle}`}</span>
       </div>
       <div
         className='preview-viewport'
@@ -65,7 +66,7 @@ export function Preview({
         role='region'
         aria-label='Scrollable post preview'
         tabIndex={0}
-        style={{ padding: `${verticalPadding}px 40px` }}>
+        style={{ padding: `${verticalPadding}px ${horizontalPadding}px` }}>
         <div
           className={`preview-art ${style.background === 'transparent' ? 'checkerboard' : ''}`}
           style={{ width: size.width * scale, height: size.height * scale }}>
