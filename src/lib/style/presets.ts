@@ -72,7 +72,23 @@ export function backgroundCSS(style: StyleState): string {
   }
 }
 
+export const noBackdropStyle: StyleState = {
+  ...defaultStyle,
+  ...themes.dark,
+  theme: 'dark',
+  background: 'transparent',
+  backgroundPadding: 0,
+  shadow: 'none',
+  border: true,
+  borderColor: '#454353'
+}
+
 export const looks: { name: string; description: string; style: StyleState }[] = [
+  {
+    name: 'Bare',
+    description: 'Midnight, minus the backdrop',
+    style: noBackdropStyle
+  },
   {
     name: 'Daydream',
     description: 'A softer kind of standout',

@@ -29,7 +29,8 @@ import {
 } from 'lucide-react'
 import { site } from '#config/site.ts'
 import { Logo } from '#components/logo.tsx'
-import { defaultStyle, type UpdateStyle } from '#lib/style/schema.ts'
+import { noBackdropStyle } from '#lib/style/presets.ts'
+import type { UpdateStyle } from '#lib/style/schema.ts'
 import { decodeStyle, encodeStyle } from '#lib/style/codec.ts'
 import { parseTweetId } from '#lib/tweet/parse.ts'
 import type { Post, TweetError, TweetResult } from '#lib/tweet/types.ts'
@@ -50,7 +51,7 @@ function readInitial() {
   }
   const stamp = Number(url.searchParams.get('at'))
   return {
-    style: (encoded ? decodeStyle(encoded) : saved ? decodeStyle(saved) : null) ?? defaultStyle,
+    style: (encoded ? decodeStyle(encoded) : saved ? decodeStyle(saved) : null) ?? noBackdropStyle,
     id: url.searchParams.get('post'),
     now: Number.isFinite(stamp) && stamp > 0 && stamp < 1e14 ? stamp : Date.now(),
     invalidStyle: !!encoded && !decodeStyle(encoded)
@@ -280,7 +281,7 @@ function StudioApp({ example }: { example: Post }) {
     style,
     update,
     setStyle,
-    reset: () => setStyle(defaultStyle),
+    reset: () => setStyle(noBackdropStyle),
     size,
     busy,
     exportDisabled: busy || loading,
