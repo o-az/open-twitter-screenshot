@@ -16,6 +16,7 @@ const hosts = new Set(
     'twitter.com',
     'x.com',
     'mobile.twitter.com',
+    'mobile.x.com',
     'fxtwitter.com',
     'vxtwitter.com',
     'fixupx.com'

@@ -64,12 +64,14 @@ export function ExportPanel({
   update,
   size,
   busy,
+  disabled,
   onExport
 }: {
   style: StyleState
   update: UpdateStyle
   size: Dimensions
   busy: boolean
+  disabled: boolean
   onExport: (copy?: boolean) => void
 }) {
   return (
@@ -125,13 +127,14 @@ export function ExportPanel({
       <Button
         className='download-button'
         isPending={busy}
+        isDisabled={disabled}
         onPress={() => onExport()}>
         <Download size={16} />
         Download {style.format.toUpperCase()}
       </Button>
       <Button
         variant='secondary'
-        isDisabled={busy}
+        isDisabled={disabled}
         onPress={() => onExport(true)}>
         <Copy size={15} />
         Copy image as PNG

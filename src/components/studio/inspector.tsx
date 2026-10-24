@@ -16,6 +16,7 @@ export function Inspector({
   reset,
   size,
   busy,
+  exportDisabled,
   onExport
 }: {
   post: Post
@@ -25,6 +26,7 @@ export function Inspector({
   reset: () => void
   size: Dimensions
   busy: boolean
+  exportDisabled: boolean
   onExport: (copy?: boolean) => void
 }) {
   return (
@@ -100,6 +102,7 @@ export function Inspector({
             update={update}
             size={size}
             busy={busy}
+            disabled={exportDisabled}
             onExport={onExport}
           />
         </Tabs.Panel>

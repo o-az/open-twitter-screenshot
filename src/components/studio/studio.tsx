@@ -154,6 +154,13 @@ function StudioApp({ example }: { example: Post }) {
     return () => controller.abort()
   }, [initial, retrieve])
 
+  useEffect(
+    () => () => {
+      request.current?.abort()
+    },
+    []
+  )
+
   useEffect(() => {
     const encoded = encodeStyle(style)
     try {
@@ -276,6 +283,7 @@ function StudioApp({ example }: { example: Post }) {
     reset: () => setStyle(defaultStyle),
     size,
     busy,
+    exportDisabled: busy || loading,
     onExport: doExport
   }
 
@@ -359,6 +367,8 @@ function StudioApp({ example }: { example: Post }) {
                 aria-label='X post URL'
                 value={urlInput}
                 onChange={setUrlInput}
+                isInvalid={error?.code === 'MALFORMED_URL'}
+                aria-describedby={error ? 'post-error-message' : undefined}
                 className='url-field'>
                 <Input
                   placeholder='Paste a link from X / Twitter…'
@@ -389,6 +399,7 @@ function StudioApp({ example }: { example: Post }) {
           </section>
           {error && (
             <Alert
+              id='post-error-message'
               className='post-error'
               status='danger'
               role='alert'>
