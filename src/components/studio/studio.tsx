@@ -367,6 +367,7 @@ function StudioApp({ example }: { example: Post }) {
                 aria-label='X post URL'
                 value={urlInput}
                 onChange={setUrlInput}
+                validationBehavior='aria'
                 isInvalid={error?.code === 'MALFORMED_URL'}
                 aria-describedby={error ? 'post-error-message' : undefined}
                 className='url-field'>
