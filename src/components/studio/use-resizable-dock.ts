@@ -7,9 +7,8 @@ const MIN = 140
 const FLOOR = 80
 const STEP = 16
 
-const headerHeight = () => document.querySelector<HTMLElement>('.app-header')?.offsetHeight ?? 56
-const actionsHeight = () =>
-  document.querySelector<HTMLElement>('.mobile-actions')?.offsetHeight ?? 56
+const headerHeight = () => document.querySelector('header.app-header')?.offsetHeight ?? 56
+const actionsHeight = () => document.querySelector('div.mobile-actions')?.offsetHeight ?? 56
 // Reserve less for the preview on short windows so the dock never pushes it off screen.
 const previewMin = () => Math.min(260, Math.max(120, Math.round(window.innerHeight * 0.4)))
 const maxHeight = () =>
