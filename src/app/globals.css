@@ -998,12 +998,12 @@ kbd {
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   line-height: 1.35;
 }
 .post-handle {
-  font-size: 13px;
+  font-size: 15px;
   color: var(--post-secondary);
   line-height: 1.5;
   font-weight: 400;
@@ -1020,7 +1020,7 @@ kbd {
   margin: -8px 0 14px;
 }
 .post-timestamp {
-  font-size: 12px;
+  font-size: 15px;
   color: var(--post-secondary);
   margin-top: 25px;
 }
@@ -1032,7 +1032,7 @@ kbd {
   padding-top: 17px;
   border-top: 1px solid color-mix(in srgb, var(--post-secondary) 18%, transparent);
   color: var(--post-secondary);
-  font-size: 12px;
+  font-size: 13px;
 }
 .post-metric {
   display: inline-flex;

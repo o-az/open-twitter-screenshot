@@ -1,5 +1,5 @@
 /* Native images keep the exact same-origin resource in the preview and exported DOM. */
-import type { CSSProperties } from 'react'
+import { useSyncExternalStore, type CSSProperties } from 'react'
 import type { Metric, Post, PostMedia, Verification } from '#lib/tweet/types.ts'
 import { fonts, type StyleState } from '#lib/style/schema.ts'
 import { formatDate, formatNumber } from '#lib/format.ts'
@@ -187,6 +187,25 @@ function PostBody({
   )
 }
 
+const subscribe = () => () => {}
+
+function Timestamp({
+  iso,
+  mode,
+  now
+}: {
+  iso: string
+  mode: StyleState['timestamp']
+  now: number
+}) {
+  const local = useSyncExternalStore(
+    subscribe,
+    () => true,
+    () => false
+  )
+  return <>{formatDate(iso, mode, now, local)}</>
+}
+
 export function PostCard({
   post,
   style,
@@ -254,7 +273,13 @@ export function PostCard({
         style={style}
       />
       {style.timestamp !== 'hidden' && (
-        <div className='post-timestamp'>{formatDate(post.createdAt, style.timestamp, now)}</div>
+        <div className='post-timestamp'>
+          <Timestamp
+            iso={post.createdAt}
+            mode={style.timestamp}
+            now={now}
+          />
+        </div>
       )}
       {!!metrics.length && (
         <div className='post-metrics'>

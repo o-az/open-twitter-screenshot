@@ -10,7 +10,8 @@ export function formatNumber(value: number, compact = true): string {
 export function formatDate(
   iso: string,
   mode: 'relative' | 'date' | 'datetime' | 'hidden',
-  now: number
+  now: number,
+  local = false
 ): string {
   const date = new Date(iso)
   if (mode === 'hidden' || !Number.isFinite(date.getTime())) return ''
@@ -21,13 +22,18 @@ export function formatDate(
     if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`
     return `${Math.floor(seconds / 86400)}d ago`
   }
+  const zone = local ? {} : { timeZone: 'UTC' }
   const day = new Intl.DateTimeFormat('en-US', {
     month: 'short',
     day: 'numeric',
     year: 'numeric',
-    timeZone: 'UTC'
+    ...zone
   }).format(date)
-  return mode === 'date'
-    ? day
-    : `${new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'UTC' }).format(date)} · ${day} UTC`
+  if (mode === 'date') return day
+  const time = new Intl.DateTimeFormat('en-US', {
+    hour: 'numeric',
+    minute: '2-digit',
+    ...zone
+  }).format(date)
+  return `${time} · ${day}${local ? '' : ' UTC'}`
 }
