@@ -466,15 +466,6 @@ kbd {
   transform-origin: top left;
   text-align: left;
 }
-.look-check {
-  position: absolute;
-  bottom: 3px;
-  right: 3px;
-  border-radius: 50%;
-  background: var(--accent);
-  color: var(--accent-foreground);
-  padding: 2px;
-}
 .look-label {
   font-size: 10px;
   color: var(--muted);
