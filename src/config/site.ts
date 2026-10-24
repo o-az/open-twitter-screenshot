@@ -6,7 +6,9 @@ const vercelHost =
 
 export const site = {
   name: 'Open Twitter Screenshot',
-  url: vercelHost ? `https://${vercelHost}` : process.env.NEXT_PUBLIC_SITE_URL,
+  url: vercelHost
+    ? `https://${vercelHost}`
+    : process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
   description:
     'Good posts deserve a beautiful frame. Turn any public X post into a share-worthy image.',
   storageKey: 'post-studio-v1'
