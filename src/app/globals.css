@@ -1008,12 +1008,6 @@ kbd {
   line-height: 1.5;
   font-weight: 400;
 }
-.post-x {
-  margin-left: auto;
-  flex-shrink: 0;
-  align-self: flex-start;
-  margin-top: 4px;
-}
 .post-text {
   white-space: pre-wrap;
   font-weight: 450;

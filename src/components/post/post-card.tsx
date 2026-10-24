@@ -127,19 +127,6 @@ function PostBody({
             </div>
             {style.handle && <div className='post-handle'>@{post.author.handle}</div>}
           </div>
-          {!nested && (
-            <svg
-              className='post-x'
-              width='23'
-              height='23'
-              viewBox='0 0 24 24'
-              aria-label='X'>
-              <path
-                fill='currentColor'
-                d='M18.9 2H22l-6.8 7.8L23.2 22h-6.3L12 14.6 5.5 22H2.4l7.3-8.5L1.8 2h6.5l4.5 6.7L18.9 2Zm-1.1 18h1.7L7.4 3.9H5.6L17.8 20Z'
-              />
-            </svg>
-          )}
         </div>
       )}
       {style.reply && post.replyTo && (
