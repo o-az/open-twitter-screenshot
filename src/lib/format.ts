@@ -1,10 +1,11 @@
 export function formatNumber(value: number, compact = true): string {
-  return new Intl.NumberFormat(
-    'en-US',
-    compact && value >= 1000
-      ? { notation: 'compact', maximumFractionDigits: 1 }
-      : { maximumFractionDigits: 0 }
-  ).format(value)
+  if (!compact || value < 1000)
+    return new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(value)
+  const [unit, suffix] = value >= 1e9 ? [1e9, 'B'] : value >= 1e6 ? [1e6, 'M'] : [1e3, 'K']
+  const scaled = value / unit
+  // X truncates instead of rounding: 309552 -> 309K, 1250 -> 1.2K
+  const out = scaled >= 10 ? Math.floor(scaled) : Math.floor(scaled * 10) / 10
+  return out + suffix
 }
 
 export function formatDate(
