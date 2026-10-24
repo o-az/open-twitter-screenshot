@@ -321,7 +321,12 @@ kbd {
   z-index: -1;
 }
 .checkerboard {
-  background: conic-gradient(#b8b8b8 25%, #ededed 0 50%, #b8b8b8 0 75%, #ededed 0) 0 0 / 16px 16px;
+  background: conic-gradient(#8a8a8e 25%, #a9a9ad 0 50%, #8a8a8e 0 75%, #a9a9ad 0) 0 0 / 16px 16px;
+  box-shadow: none;
+}
+.checkerboard .artboard {
+  overflow: visible;
+  background-clip: border-box;
 }
 .canvas-toolbar {
   display: flex;
