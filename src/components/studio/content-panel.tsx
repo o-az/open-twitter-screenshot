@@ -1,4 +1,4 @@
-import type { Metric, Post } from '#lib/tweet/types.ts'
+import { metricKeys, type Post } from '#lib/tweet/types.ts'
 import type { StyleState, UpdateStyle } from '#lib/style/schema.ts'
 import { metricNames } from '#components/post/post-card.tsx'
 import { DropdownField, SectionTitle, Toggle } from '#components/studio/controls.tsx'
@@ -99,7 +99,7 @@ export function ContentPanel({
       </div>
       <div>
         <SectionTitle>Engagement</SectionTitle>
-        {(Object.keys(metricNames) as Metric[]).map(key => (
+        {metricKeys.map(key => (
           <Toggle
             key={key}
             label={metricNames[key]}

@@ -1,5 +1,6 @@
 export type Verification = 'blue' | 'gold' | 'gray' | 'none'
 export type Metric = 'replies' | 'reposts' | 'likes' | 'bookmarks' | 'views'
+export const metricKeys: readonly Metric[] = ['replies', 'reposts', 'likes', 'bookmarks', 'views']
 
 export interface PostSegment {
   text: string

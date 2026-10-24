@@ -119,8 +119,9 @@ export function Choice<T extends string>({
         aria-label={label}
         selectedKeys={[value]}
         onSelectionChange={keys => {
-          const key = [...keys][0]
-          if (key) onChange(key as T)
+          const [key] = keys
+          const option = options.find(o => o.id === key)
+          if (option) onChange(option.id)
         }}
         disallowEmptySelection
         size='sm'>
@@ -152,7 +153,8 @@ export function DropdownField<T extends string>({
       className='studio-select'
       value={value}
       onChange={key => {
-        if (key) onChange(key as T)
+        const option = options.find(o => o.id === key)
+        if (option) onChange(option.id)
       }}>
       <Label>{label}</Label>
       <Select.Trigger>

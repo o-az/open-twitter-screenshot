@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import type { Post } from '#lib/tweet/types.ts'
+import { metricKeys, type Post } from '#lib/tweet/types.ts'
 import { ID_PATTERN } from '#lib/tweet/parse.ts'
 
 const count = z.number().int().nonnegative().safe().nullish()
@@ -66,7 +66,7 @@ export async function fetchMetrics(post: Post): Promise<Post['metrics']> {
       bookmarks: tweet.bookmarks,
       views: tweet.views
     }
-    for (const key of Object.keys(counters) as (keyof typeof counters)[]) {
+    for (const key of metricKeys) {
       const value = counters[key]
       if (value != null && Number.isSafeInteger(value)) metrics[key] = value
     }
