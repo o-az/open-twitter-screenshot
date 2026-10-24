@@ -80,7 +80,7 @@ export const noBackdropStyle: StyleState = {
   backgroundPadding: 0,
   shadow: 'none',
   border: true,
-  borderColor: '#454353'
+  borderColor: '#222223'
 }
 
 export const looks: { name: string; description: string; style: StyleState }[] = [
