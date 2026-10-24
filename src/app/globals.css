@@ -324,10 +324,6 @@ kbd {
   background: conic-gradient(#8a8a8e 25%, #a9a9ad 0 50%, #8a8a8e 0 75%, #a9a9ad 0) 0 0 / 16px 16px;
   box-shadow: none;
 }
-.checkerboard .artboard {
-  overflow: visible;
-  background-clip: border-box;
-}
 .canvas-toolbar {
   display: flex;
   flex-shrink: 0;
