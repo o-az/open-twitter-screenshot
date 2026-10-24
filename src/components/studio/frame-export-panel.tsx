@@ -99,7 +99,10 @@ export function ExportPanel({
       <Choice
         label='Resolution'
         value={String(style.scale)}
-        onChange={v => update('scale', Number(v) as StyleState['scale'])}
+        onChange={v => {
+          const scale = Number(v)
+          if (scale === 1 || scale === 2 || scale === 3 || scale === 4) update('scale', scale)
+        }}
         options={[
           { id: '1', label: '1×' },
           { id: '2', label: '2×' },

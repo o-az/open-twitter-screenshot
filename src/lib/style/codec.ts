@@ -2,7 +2,10 @@ import { defaultStyle, styleSchema, type StyleState } from '#lib/style/schema.ts
 
 export function encodeStyle(style: StyleState): string {
   const diff = Object.fromEntries(
-    Object.entries(style).filter(([key, value]) => value !== defaultStyle[key as keyof StyleState])
+    styleSchema
+      .keyof()
+      .options.filter(key => style[key] !== defaultStyle[key])
+      .map(key => [key, style[key]])
   )
   const bytes = new TextEncoder().encode(JSON.stringify(diff))
   let binary = ''
