@@ -1,33 +1,45 @@
 {
   "__typename": "Tweet",
-  "favorite_count": 7650,
+  "favorite_count": 309039,
   "lang": "en",
-  "created_at": "2026-04-15T02:00:50.000Z",
+  "created_at": "2006-03-21T20:50:14.000Z",
   "display_text_range": [
     0,
-    91
+    24
   ],
   "entities": {},
-  "id_str": "2044234462972784792",
-  "text": "Truth, love, and beauty are all pursued for their own sake, even if they make us worse off.",
+  "id_str": "20",
+  "text": "just setting up my twttr",
   "user": {
-    "id_str": "745273",
-    "name": "Naval",
-    "screen_name": "naval",
+    "id_str": "12",
+    "name": "jack",
+    "screen_name": "jack",
     "is_blue_verified": true,
     "profile_image_shape": "Circle",
     "verified": false,
-    "profile_image_url_https": "https://pbs.twimg.com/profile_images/1256841238298292232/ycqwaMI2_normal.jpg"
+    "profile_image_url_https": "https://pbs.twimg.com/profile_images/1661201415899951105/azNjKOSH_normal.jpg",
+    "highlighted_label": {
+      "badge": {
+        "url": "https://pbs.twimg.com/profile_images/1285655593592791040/HtwPZgej_bigger.jpg"
+      },
+      "description": "Square",
+      "url": {
+        "url": "https://twitter.com/Square",
+        "url_type": "DeepLink"
+      },
+      "user_label_display_type": "Badge",
+      "user_label_type": "BusinessLabel"
+    }
   },
   "edit_control": {
     "edit_tweet_ids": [
-      "2044234462972784792"
+      "20"
     ],
-    "editable_until_msecs": "1776222050000",
+    "editable_until_msecs": "1142976014000",
     "edits_remaining": "5",
     "is_edit_eligible": true
   },
-  "conversation_count": 458,
+  "conversation_count": 18109,
   "news_action_type": "conversation",
   "isEdited": false,
   "isStaleEdit": false
