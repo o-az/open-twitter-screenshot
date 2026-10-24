@@ -68,7 +68,7 @@ export function Preview({
         tabIndex={0}
         style={{ padding: `${verticalPadding}px ${horizontalPadding}px` }}>
         <div
-          className={`preview-art ${style.background === 'transparent' ? 'checkerboard' : ''}`}
+          className={`preview-art ${style.background === 'transparent' ? 'preview-art-transparent' : ''}`}
           style={{ width: size.width * scale, height: size.height * scale }}>
           <div
             className='preview-zoom'

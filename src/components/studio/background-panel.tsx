@@ -170,8 +170,8 @@ export function BackgroundPanel({
       )}
       {style.background === 'transparent' && (
         <p className='panel-note'>
-          The checkerboard is only a guide. PNG, WebP, and SVG preserve transparency. JPEG uses
-          white.
+          The canvas shows through where the backdrop is transparent. PNG, WebP, and SVG preserve
+          transparency. JPEG uses white.
         </p>
       )}
       <div className='panel-divider' />

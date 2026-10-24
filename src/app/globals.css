@@ -320,8 +320,7 @@ kbd {
   overflow: hidden;
   z-index: -1;
 }
-.checkerboard {
-  background: conic-gradient(#8a8a8e 25%, #a9a9ad 0 50%, #8a8a8e 0 75%, #a9a9ad 0) 0 0 / 16px 16px;
+.preview-art-transparent {
   box-shadow: none;
 }
 .canvas-toolbar {
