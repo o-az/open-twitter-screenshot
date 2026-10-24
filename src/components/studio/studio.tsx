@@ -38,6 +38,7 @@ import { downloadImage, exportImage } from '#lib/export/image.ts'
 import { Inspector } from '#components/studio/inspector.tsx'
 import { Presets } from '#components/studio/presets.tsx'
 import { Preview } from '#components/studio/preview.tsx'
+import { useResizableDock } from '#components/studio/use-resizable-dock.ts'
 import type { Dimensions } from '#components/post/artboard.tsx'
 
 function readInitial() {
@@ -88,6 +89,8 @@ function StudioApp({ example }: { example: Post }) {
   const [shortcuts, setShortcuts] = useState(false)
   const [customizing, setCustomizing] = useState(false)
   const [size, setSize] = useState<Dimensions>({ width: 680, height: 480 })
+  const controlsRef = useRef<HTMLElement>(null)
+  const dock = useResizableDock(controlsRef)
   const [theme, setTheme] = useState(document.documentElement.dataset.theme || 'dark')
   const board = useRef<HTMLDivElement>(null)
   const customizeButton = useRef<HTMLButtonElement>(null)
@@ -467,7 +470,10 @@ function StudioApp({ example }: { example: Post }) {
         inert={busy}>
         <section
           id='mobile-controls'
+          ref={controlsRef}
           className='mobile-controls'
+          data-dragging={dock.dragging || undefined}
+          style={dock.height === null ? undefined : { height: dock.height }}
           aria-label='Customize screenshot'
           hidden={!customizing}
           onKeyDown={event => {
@@ -477,6 +483,10 @@ function StudioApp({ example }: { example: Post }) {
               customizeButton.current?.focus()
             }
           }}>
+          <div
+            className='dock-handle'
+            {...dock.handleProps}
+          />
           <Inspector {...inspectorProps} />
         </section>
         <div className='mobile-actions'>

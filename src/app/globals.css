@@ -969,6 +969,9 @@ kbd {
 .mobile-dock {
   display: none;
 }
+.dock-handle {
+  display: none;
+}
 
 /* The exported subtree deliberately has no UI-library components or theme tokens. */
 .post-card {
@@ -1357,8 +1360,47 @@ kbd {
     font-size: 12px;
   }
   .mobile-controls {
+    position: relative;
+    display: flex;
+    flex-direction: column;
     height: min(30dvh, 240px);
     border-bottom: 1px solid var(--border);
+  }
+  .mobile-controls[hidden] {
+    display: none;
+  }
+  .mobile-controls .inspector-inner {
+    flex: 1;
+  }
+  .dock-handle {
+    display: block;
+    position: absolute;
+    inset: -14px 0 auto;
+    height: 28px;
+    z-index: 5;
+    cursor: row-resize;
+    touch-action: none;
+    outline: none;
+  }
+  .dock-handle::after {
+    content: '';
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    width: 36px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--border);
+    transform: translate(-50%, -50%);
+    transition: background-color 150ms ease-out;
+  }
+  .dock-handle:hover::after,
+  .mobile-controls[data-dragging] .dock-handle::after,
+  .dock-handle:focus-visible::after {
+    background: var(--accent);
+  }
+  .mobile-controls[data-dragging] {
+    user-select: none;
   }
   .mobile-controls .inspector-heading,
   .mobile-controls .inspector-bottom {
