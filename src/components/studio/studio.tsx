@@ -29,7 +29,8 @@ import {
 } from 'lucide-react'
 import { site } from '#config/site.ts'
 import { Logo } from '#components/logo.tsx'
-import { defaultStyle, type UpdateStyle } from '#lib/style/schema.ts'
+import { noBackdropStyle } from '#lib/style/presets.ts'
+import type { UpdateStyle } from '#lib/style/schema.ts'
 import { decodeStyle, encodeStyle } from '#lib/style/codec.ts'
 import { parseTweetId } from '#lib/tweet/parse.ts'
 import type { Post, TweetError, TweetResult } from '#lib/tweet/types.ts'
@@ -37,6 +38,7 @@ import { downloadImage, exportImage } from '#lib/export/image.ts'
 import { Inspector } from '#components/studio/inspector.tsx'
 import { Presets } from '#components/studio/presets.tsx'
 import { Preview } from '#components/studio/preview.tsx'
+import { useResizableDock } from '#components/studio/use-resizable-dock.ts'
 import type { Dimensions } from '#components/post/artboard.tsx'
 
 function readInitial() {
@@ -50,7 +52,7 @@ function readInitial() {
   }
   const stamp = Number(url.searchParams.get('at'))
   return {
-    style: (encoded ? decodeStyle(encoded) : saved ? decodeStyle(saved) : null) ?? defaultStyle,
+    style: (encoded ? decodeStyle(encoded) : saved ? decodeStyle(saved) : null) ?? noBackdropStyle,
     id: url.searchParams.get('post'),
     now: Number.isFinite(stamp) && stamp > 0 && stamp < 1e14 ? stamp : Date.now(),
     invalidStyle: !!encoded && !decodeStyle(encoded)
@@ -87,6 +89,8 @@ function StudioApp({ example }: { example: Post }) {
   const [shortcuts, setShortcuts] = useState(false)
   const [customizing, setCustomizing] = useState(false)
   const [size, setSize] = useState<Dimensions>({ width: 680, height: 480 })
+  const controlsRef = useRef<HTMLElement>(null)
+  const dock = useResizableDock(controlsRef)
   const [theme, setTheme] = useState(document.documentElement.dataset.theme || 'dark')
   const board = useRef<HTMLDivElement>(null)
   const customizeButton = useRef<HTMLButtonElement>(null)
@@ -153,6 +157,13 @@ function StudioApp({ example }: { example: Post }) {
     void retrieve(initial.id, controller.signal)
     return () => controller.abort()
   }, [initial, retrieve])
+
+  useEffect(
+    () => () => {
+      request.current?.abort()
+    },
+    []
+  )
 
   useEffect(() => {
     const encoded = encodeStyle(style)
@@ -273,9 +284,10 @@ function StudioApp({ example }: { example: Post }) {
     style,
     update,
     setStyle,
-    reset: () => setStyle(defaultStyle),
+    reset: () => setStyle(noBackdropStyle),
     size,
     busy,
+    exportDisabled: busy || loading,
     onExport: doExport
   }
 
@@ -359,6 +371,9 @@ function StudioApp({ example }: { example: Post }) {
                 aria-label='X post URL'
                 value={urlInput}
                 onChange={setUrlInput}
+                validationBehavior='aria'
+                isInvalid={error?.code === 'MALFORMED_URL'}
+                aria-describedby={error ? 'post-error-message' : undefined}
                 className='url-field'>
                 <Input
                   placeholder='Paste a link from X / Twitter…'
@@ -389,6 +404,7 @@ function StudioApp({ example }: { example: Post }) {
           </section>
           {error && (
             <Alert
+              id='post-error-message'
               className='post-error'
               status='danger'
               role='alert'>
@@ -454,7 +470,10 @@ function StudioApp({ example }: { example: Post }) {
         inert={busy}>
         <section
           id='mobile-controls'
+          ref={controlsRef}
           className='mobile-controls'
+          data-dragging={dock.dragging || undefined}
+          style={dock.height === null ? undefined : { height: dock.height }}
           aria-label='Customize screenshot'
           hidden={!customizing}
           onKeyDown={event => {
@@ -464,6 +483,10 @@ function StudioApp({ example }: { example: Post }) {
               customizeButton.current?.focus()
             }
           }}>
+          <div
+            className='dock-handle'
+            {...dock.handleProps}
+          />
           <Inspector {...inspectorProps} />
         </section>
         <div className='mobile-actions'>

@@ -1,5 +1,6 @@
 import { normalizeTweet } from '#lib/tweet/normalize.ts'
 import { completeLongPosts } from '#lib/tweet/complete.ts'
+import { fetchMetrics } from '#lib/tweet/metrics.ts'
 import { parseTweetId, TweetException } from '#lib/tweet/parse.ts'
 import type { TweetError, TweetErrorCode, TweetResult } from '#lib/tweet/types.ts'
 
@@ -71,7 +72,11 @@ export async function getTweet(input: string): Promise<TweetResult> {
       return failure('NOT_FOUND')
     const post = normalizeTweet(raw)
     if (post.id !== id) return failure('UNAVAILABLE')
-    return { post: await completeLongPosts(raw, post) }
+    const [completed, metrics] = await Promise.all([
+      completeLongPosts(raw, post),
+      fetchMetrics(post)
+    ])
+    return { post: { ...completed, metrics: { ...completed.metrics, ...metrics } } }
   } catch (error) {
     return failure(error instanceof TweetException ? error.code : 'UNAVAILABLE')
   }

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { Button, Form, Input, Label, Modal, TextField, toast } from '@heroui/react'
-import { Check, Plus, Trash2 } from 'lucide-react'
+import { Plus, Trash2 } from 'lucide-react'
 import { z } from 'zod'
 import { backgroundCSS, looks } from '#lib/style/presets.ts'
 import { styleSchema, type StyleState } from '#lib/style/schema.ts'
@@ -82,11 +82,6 @@ export function Presets({
                   now={now}
                 />
               </div>
-              {JSON.stringify(style) === JSON.stringify(look.style) && (
-                <span className='look-check'>
-                  <Check size={9} />
-                </span>
-              )}
             </Button>
             <div className='look-label'>
               {look.name}

@@ -1,5 +1,5 @@
 /* Native images keep the exact same-origin resource in the preview and exported DOM. */
-import type { CSSProperties } from 'react'
+import { useSyncExternalStore, type CSSProperties } from 'react'
 import type { Metric, Post, PostMedia, Verification } from '#lib/tweet/types.ts'
 import { fonts, type StyleState } from '#lib/style/schema.ts'
 import { formatDate, formatNumber } from '#lib/format.ts'
@@ -127,19 +127,6 @@ function PostBody({
             </div>
             {style.handle && <div className='post-handle'>@{post.author.handle}</div>}
           </div>
-          {!nested && (
-            <svg
-              className='post-x'
-              width='23'
-              height='23'
-              viewBox='0 0 24 24'
-              aria-label='X'>
-              <path
-                fill='currentColor'
-                d='M18.9 2H22l-6.8 7.8L23.2 22h-6.3L12 14.6 5.5 22H2.4l7.3-8.5L1.8 2h6.5l4.5 6.7L18.9 2Zm-1.1 18h1.7L7.4 3.9H5.6L17.8 20Z'
-              />
-            </svg>
-          )}
         </div>
       )}
       {style.reply && post.replyTo && (
@@ -198,6 +185,25 @@ function PostBody({
       )}
     </>
   )
+}
+
+const subscribe = () => () => {}
+
+function Timestamp({
+  iso,
+  mode,
+  now
+}: {
+  iso: string
+  mode: StyleState['timestamp']
+  now: number
+}) {
+  const local = useSyncExternalStore(
+    subscribe,
+    () => true,
+    () => false
+  )
+  return <>{formatDate(iso, mode, now, local)}</>
 }
 
 export function PostCard({
@@ -267,7 +273,13 @@ export function PostCard({
         style={style}
       />
       {style.timestamp !== 'hidden' && (
-        <div className='post-timestamp'>{formatDate(post.createdAt, style.timestamp, now)}</div>
+        <div className='post-timestamp'>
+          <Timestamp
+            iso={post.createdAt}
+            mode={style.timestamp}
+            now={now}
+          />
+        </div>
       )}
       {!!metrics.length && (
         <div className='post-metrics'>

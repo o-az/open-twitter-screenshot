@@ -50,7 +50,7 @@ export function ContentPanel({
         options={[
           { id: 'relative', label: 'Relative time' },
           { id: 'date', label: 'Full date' },
-          { id: 'datetime', label: 'Date + time (UTC)' },
+          { id: 'datetime', label: 'Time + date' },
           { id: 'hidden', label: 'Hidden' }
         ]}
       />
