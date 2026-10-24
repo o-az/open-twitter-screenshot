@@ -1,6 +1,6 @@
 import raw from '#lib/tweet/example.json'
 import { normalizeTweet } from '#lib/tweet/normalize.ts'
 
-/** Authentic public text, captured from syndication on 2026-10-22; no live request. */
+/** Public syndication snapshot with FxTwitter engagement counts captured 2026-10-24. */
 export const examplePost = normalizeTweet(raw)
 export default examplePost

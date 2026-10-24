@@ -1,6 +1,6 @@
 {
   "__typename": "Tweet",
-  "favorite_count": 309039,
+  "favorite_count": 309552,
   "lang": "en",
   "created_at": "2006-03-21T20:50:14.000Z",
   "display_text_range": [
@@ -42,5 +42,7 @@
   "conversation_count": 18109,
   "news_action_type": "conversation",
   "isEdited": false,
-  "isStaleEdit": false
+  "isStaleEdit": false,
+  "retweet_count": 131884,
+  "bookmark_count": 21973
 }
