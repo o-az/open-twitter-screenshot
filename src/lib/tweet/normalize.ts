@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import type { Post, PostMedia, PostSegment } from '#lib/tweet/types.ts'
+import { metricKeys, type Post, type PostMedia, type PostSegment } from '#lib/tweet/types.ts'
 import { ID_PATTERN } from '#lib/tweet/parse.ts'
 
 const httpUrl = z
@@ -236,8 +236,7 @@ function normalize(raw: unknown, depth: number): Post {
     bookmarks: t.bookmark_count,
     views: t.view_count
   }
-  for (const key of Object.keys(counters) as (keyof typeof counters)[])
-    if (counters[key] !== undefined) post.metrics[key] = counters[key]
+  for (const key of metricKeys) if (counters[key] !== undefined) post.metrics[key] = counters[key]
   if (t.note_tweet != null) post.isTruncated = true
   if (depth === 0) {
     if (t.quoted_tweet) {

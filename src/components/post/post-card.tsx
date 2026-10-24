@@ -1,6 +1,12 @@
 /* Native images keep the exact same-origin resource in the preview and exported DOM. */
 import { useSyncExternalStore, type CSSProperties } from 'react'
-import type { Metric, Post, PostMedia, Verification } from '#lib/tweet/types.ts'
+import {
+  metricKeys,
+  type Metric,
+  type Post,
+  type PostMedia,
+  type Verification
+} from '#lib/tweet/types.ts'
 import { fonts, type StyleState } from '#lib/style/schema.ts'
 import { formatDate, formatNumber } from '#lib/format.ts'
 
@@ -221,10 +227,11 @@ export function PostCard({
     strong: '0 24px 60px -10px #18142a55, 0 6px 16px #18142a22',
     glow: `0 0 48px ${style.accentColor}66`
   }[style.shadow]
-  const metrics = (Object.keys(metricNames) as Metric[]).filter(
-    key => style[key] && post.metrics[key] !== undefined
-  )
-  const css: CSSProperties = {
+  const metrics = metricKeys.flatMap(key => {
+    const value = post.metrics[key]
+    return style[key] && value !== undefined ? [{ key, value }] : []
+  })
+  const css: CSSProperties & { '--post-secondary': string } = {
     width: style.cardWidth,
     padding: style.padding,
     borderRadius: style.radius,
@@ -237,7 +244,7 @@ export function PostCard({
       : '0 solid transparent',
     boxShadow: shadow,
     '--post-secondary': style.secondaryColor
-  } as CSSProperties
+  }
   return (
     <article
       className='post-card'
@@ -283,11 +290,11 @@ export function PostCard({
       )}
       {!!metrics.length && (
         <div className='post-metrics'>
-          {metrics.map(key => (
+          {metrics.map(({ key, value }) => (
             <span
               key={key}
               className='post-metric'
-              aria-label={`${metricNames[key]}: ${post.metrics[key]}`}>
+              aria-label={`${metricNames[key]}: ${value}`}>
               {style.metricStyle !== 'numbers' && (
                 <svg
                   width='18'
@@ -302,7 +309,7 @@ export function PostCard({
                   <path d={metricPaths[key]} />
                 </svg>
               )}
-              {formatNumber(post.metrics[key]!, style.metricStyle === 'compact')}
+              {formatNumber(value, style.metricStyle === 'compact')}
               {style.metricStyle === 'numbers' && <small>{metricNames[key]}</small>}
             </span>
           ))}
