@@ -727,6 +727,13 @@ kbd {
   width: 12px;
   height: 12px;
 }
+/* HeroUI positions the selected thumb assuming its wider default thumb and
+   paints it accent-foreground — near-black on dark theme. Keep the thumb
+   light and re-center it in the narrower 28px track. */
+.toggle-row .switch[data-selected='true'] .switch__thumb {
+  margin-inline-start: calc(100% - 14px);
+  background: #fff;
+}
 .toggle-row > .button {
   width: 20px;
   height: 20px;
