@@ -83,6 +83,11 @@ export function ContentPanel({
               key: 'linkCard',
               label: 'Link preview',
               available: !!post.linkCard
+            },
+            {
+              key: 'linkCardImage',
+              label: 'Link preview image',
+              available: !!post.linkCard?.image
             }
           ] as const
         ).map(({ key, label, available }) => (
@@ -92,7 +97,11 @@ export function ContentPanel({
             value={style[key]}
             onChange={v => update(key, v)}
             unavailable={
-              !available ? `X didn't return ${label.toLowerCase()} for this post.` : undefined
+              !available
+                ? `X didn't return ${label.toLowerCase()} for this post.`
+                : key === 'linkCardImage' && !style.linkCard
+                  ? 'Turn on Link preview to use this.'
+                  : undefined
             }
           />
         ))}

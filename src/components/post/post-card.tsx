@@ -157,7 +157,7 @@ function PostBody({
       {style.media && <MediaGrid media={post.media} />}
       {style.linkCard && post.linkCard && (
         <div className='post-link-card'>
-          {post.linkCard.image && (
+          {style.linkCardImage && post.linkCard.image && (
             <img
               src={proxy(post.linkCard.image)}
               alt='Link preview'

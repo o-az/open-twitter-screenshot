@@ -15,6 +15,7 @@ export const styleSchema = z.object({
   thread: z.boolean().default(false),
   note: z.boolean().default(true),
   linkCard: z.boolean().default(true),
+  linkCardImage: z.boolean().default(true),
   replies: z.boolean().default(true),
   reposts: z.boolean().default(true),
   likes: z.boolean().default(true),
